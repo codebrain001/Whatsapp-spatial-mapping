@@ -13,7 +13,7 @@ class WhatsappAutomation:
         time.sleep(30)
 
     def get_contacts(self, whatsapp_group_xpath, contact_element_xpath):
-        group = self.chrome_browser.find_element_by_xpath(group_xpath)
+        group = self.chrome_browser.find_element_by_xpath(whatsapp_group_xpath)
         group.click()
         time.sleep(10)
         contacts = self.chrome_browser.find_elements_by_xpath(
@@ -25,7 +25,7 @@ class WhatsappAutomation:
         # We have to remove white spaces in the numbers
         contacts = re.sub(r"\s+", "", contacts)
         # We have to remove stmbols such as '()-'
-        contacts = re.sub(r"[()-]", "", contacts)
+        contacts = re.sub(r"[()-]+", "", contacts)
         # Your number is shown as 'You' on whatsapp Group, we have to remove that also
         contacts = contacts.replace(",You", "")
 
@@ -39,6 +39,7 @@ class WhatsappAutomation:
         # split the common separated string values into a CSV file
         w.writerows([x.split(',') for x in contact_list])
         f.close()
+        return contact_list
 
     def quit(self):
         print('Quiting session in 10 seconds...')
