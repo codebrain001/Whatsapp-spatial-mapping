@@ -24,12 +24,16 @@ class WhatsappAnalytics:
          # create header
         w.writerow(['country'])
         # split the common separated string values into a CSV file
-        w.writerows([x.split(',') for x in data])
+        w.writerows([x.split(' ') for x in data])
         f.close()
-        return data
+        # return data
        
-       
-       
+
+
+
+
+
+
        
         # # Saving the JSON file to memory
         # with open('Whatsapp_insights.json', 'w') as insight_json_file:

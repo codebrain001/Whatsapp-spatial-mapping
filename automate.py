@@ -25,7 +25,7 @@ class WhatsappAutomation:
         # We have to remove white spaces in the numbers
         contacts = re.sub(r"\s+", "", contacts)
         # We have to remove stmbols such as '()-'
-        contacts = re.sub(r"[()-]+", "", contacts)
+        contacts = re.sub(r"[()+-]", "", contacts)
         # Your number is shown as 'You' on whatsapp Group, we have to remove that also
         contacts = contacts.replace(",You", "")
 
