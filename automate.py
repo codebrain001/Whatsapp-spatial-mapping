@@ -33,7 +33,7 @@ class WhatsappAutomation:
         contact_list = contacts.split(',')
         # writing the contacts (list) to a csv file
         f = open('contact_data.csv', 'w')
-        w = csv.writer(f, delimiter=',', )
+        w = csv.writer(f, delimiter=',')
         # create header
         w.writerow(['contact'])
         # split the common separated string values into a CSV file
