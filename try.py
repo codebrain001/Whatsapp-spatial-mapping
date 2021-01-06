@@ -5,14 +5,19 @@ from pprint import pprint
 client = nexmo.Client(key='31a8b23d', secret='XLu6QzbdWFuvEyyy')
 
 contacts = ['2348099899375', '2348141921557']
-data = '{}'
-data_json = json.loads(data)
+data = []
+# data = '{}'
+# data_json = json.loads(data)
+# with open('data.json', 'w') as file:
+for contact in contacts:
+    insight_json = client.get_advanced_number_insight(number=contact).get('country_name')
+    data.append(insight_json)
+    # data_json.update(insight_json)
+    # file.seek(0)
+    # json.dump(data_json, file)
+
 with open('data.json', 'w') as file:
-    for contact in contacts:
-        insight_json = client.get_advanced_number_insight(number=contact)
-        data_json.update(insight_json)
-        file.seek(0)
-        json.dump(data_json, file)
+    json.dump(data, file)
 
 
 
