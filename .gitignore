@@ -1,5 +1,4 @@
 .env
 .vscode
-contact_data.csv
-country_data.csv
-geocode_data.csv
+*.csv
+
