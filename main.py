@@ -17,3 +17,4 @@ geo_df = geocoding_object.geocode_df(analytics_df)
 
 spatial_mapping_object = SpatialMapping()
 spatial_mapping_object.plot_map(geo_df)
+spatial_mapping_object.plot_bar(geo_df)

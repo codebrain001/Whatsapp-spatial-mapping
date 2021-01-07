@@ -34,12 +34,12 @@ class SpatialMapping:
         print('The link to the plot can be found here: ', py.plot(
             fig, filename='Whatsapp Analytics Map', auto_open=True))
 
-        def plot_bar(self, dataframe):
-            fig = px.bar(
-                dataframe, x='country', y='counts',
-                hover_data=["country", 'counts'],
-                color_discrete_sequence=['darkgreen'])
+    def plot_bar(self, dataframe):
+        fig = px.bar(
+            dataframe, x='country', y='counts',
+            hover_data=["country", 'counts'],
+            color_discrete_sequence=['darkgreen'])
 
-            fig.update_layout(
-                title='WhatsApp Analytics: Distribution of WhatsApp group contacts')
-            fig.show()
+        fig.update_layout(
+            title='WhatsApp Analytics: Distribution of WhatsApp group contacts')
+        fig.show()
