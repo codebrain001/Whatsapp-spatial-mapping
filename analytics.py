@@ -2,6 +2,7 @@ from decouple import config
 import json
 import csv
 import nexmo
+import pandas as pd
 
 
 class WhatsappAnalytics:
@@ -12,6 +13,7 @@ class WhatsappAnalytics:
         self.client = nexmo.Client(key=self.key, secret=self.secret)
 
     def get_insights(self, contact_list):
+        print('Getting number insights')
         data = []
         for contact in contact_list:
             insight_json = self.client.get_advanced_number_insight(
@@ -26,3 +28,6 @@ class WhatsappAnalytics:
         # split the common separated string values into a CSV file
         w.writerows([x.split(',') for x in data])
         f.close()
+
+        dataframe = pd.read_csv('country_data.csv')
+        return dataframe
