@@ -1,5 +1,4 @@
 from decouple import config
-
 import plotly.express as px
 import chart_studio
 from chart_studio import plotly as py
