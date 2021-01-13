@@ -20,8 +20,6 @@ class WhatsappAutomation:
             contact_element_xpath)
         # Note: The find elements returns a list object
         contacts = contacts[0].get_attribute('textContent')
-        # print(contacts_content)
-        # print(type(contacts_content))
         # We have to remove white spaces in the numbers
         contacts = re.sub(r"\s+", "", contacts)
         # We have to remove stmbols such as '()-'
