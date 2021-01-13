@@ -28,6 +28,7 @@ class WhatsappAnalytics:
         # split the common separated string values into a CSV file
         w.writerows([x.split(',') for x in data])
         f.close()
+        print('Number insights generated successfully')
 
         dataframe = pd.read_csv('country_data.csv')
         return dataframe
