@@ -8,7 +8,7 @@ class GoogleGeocoding:
         self.gmaps = googlemaps.Client(key=self.key)
 
     def geocode_df(self, dataframe):
-        print('Preparing for geocoding...')
+        print('Preparing for geocoding country code...')
         df = dataframe
         df = df.value_counts().rename_axis('country').reset_index(name='counts')
         for index in df.index:
