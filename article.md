@@ -11,8 +11,8 @@ In order to follow and fully understand this tutorial, you'll need to have:
 - Set up [Plotly]('https://plotly.com/') and [Mapbox]('https://www.mapbox.com/') credentials
 
 Below are the result of the final interface you’ll build:
-![gif](./overview-1.gif)
-![gif](./overview-2.gif)
+![gif](./images/overview-1.gif)
+![gif](./images/overview-2.gif)
 
 ## File Structure
 An overview of the file directory for this project, which has been arranged to enforce clean coding best practices is shown below:
@@ -98,3 +98,40 @@ Optionally, you can install all the packages as follows:
   ```
     conda install -c conda-forge chart-studio googlemaps nexmo numpy pandas plotly plotly-express python-decouple selenium
   ```
+
+## Setting up APIs and Credentials
+With all our dependencies completed installed for this tutorial, we need to set up some accounts to get our API keys and credentials.
+
+### Vonage API Account
+To complete this tutorial, you will need a [Vonage API account]('https://dashboard.nexmo.com/sign-in'). If you don’t have one already, you can [sign up today]('https://dashboard.nexmo.com/sign-up') and start building with free credit. Once you have an account, you can find your API Key and API Secret at the top of the [Vonage API Dashboard]('https://dashboard.nexmo.com/sign-in').
+
+### Google Map Platform 
+The Google Map API is one of the potent APIs readily available on [Google Cloud Console]('https://console.cloud.google.com/'). Firstly, you need to set up a [Google cloud free tier account]('https://cloud.google.com/free'), where you get $300 free credits to explore the Google cloud platform and products.  Next, with Your Google Cloud Console all set up, you need to [create an API]('https://developers.google.com/maps/documentation/javascript/get-api-key') key to connect the [Google Map Platform]('https://cloud.google.com/maps-platform') to our application. Lastly, we [activate the Google Map API ]('https://cloud.google.com/service-usage/docs/enable-disable') to enable it for our project.
+
+### Plotly API and Mapbox Credentials
+In order to create beautiful data visualizations, we will be utilizing [Plotly]('https://plotly.com/') on Python and enhancing the aesthetic with [Mapbox]('https://www.mapbox.com/'). The Plotly plots is hosted online on Chart Studio (part of Plotly enterprise), you need to [sign up]('https://chart-studio.plotly.com/Auth/login/#/') and generate and save our custom [Plotly API key]('https://plotly.com/python/getting-started-with-chart-studio/'). Also beneficial to the desired plots, you need to [sign up at Mapbox]('https://account.mapbox.com/auth/signup/'). Next, to connect Mapbox with Plotly for our desired visualization, we need to create a [Mapbox authorization token]('https://docs.mapbox.com/help/tutorials/get-started-tokens-api/').
+
+## Separation of settings parameters and source code
+In the previous section, we were actively generating various API keys and credentials which are variables that exist outside of our source code and are unique to each user. 
+Firstly you need to create an environment file (.env), which can easily be done on your IDE by creating a new file and naming it `.env` or can be done via the terminal as follow:
+```
+(whatsapp-spatial-mapping) $ touch .env   # create a new .env file
+(whatsapp-spatial-mapping) $ nano .env    # open the .env file 
+```
+ An environment variable is made up of a name/value pair, and any number may be created and available for reference at a point in time.
+
+ For example, the content of the `.env` file should look somewhat like this:
+ ```
+    user=Brain
+    key=xxxxxxxxxxxxxxxxxxxxxxxxxx
+ ```
+
+Parameters related to the project, goes straight to the source code. Parameters related to an instance of the project, goes to an environment file. 
+
+**N/B:** It is good practice to add the `.env` file to the [gitignore]('https://git-scm.com/docs/gitignore') file. This prevent sensitive information such as API keys and other configuration values to be made public on the source code.
+
+To access these environment variable values, we can utilize an already install python library [Python Decouple]('https://pypi.org/project/python-decouple/').
+
+## Overview of the project
+
+## Scripts and explanation
