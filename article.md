@@ -140,3 +140,160 @@ WhatsApp groups has served as environment to establish collective conversations 
 For a business use case, it might be interesting to know where users are located to deliver better services and products better. This tutorial is a step in the right direction to aid this analytic procedure and build an interface to geo-locate users in a WhatsApp group.
 
 ## Scripts and explanation
+Each script is written to contain codes that handle or work together to achieve a common goal utilizing . The following are a high-level explanation for each script.
+
+1. automate.py
+   
+
+***
+```
+import os
+import time
+import re
+import csv
+from selenium import webdriver
+
+
+class WhatsappAutomation:
+    def __init__(self):
+        self.chrome_browser = webdriver.Chrome('./chromedriver')
+        self.chrome_browser.maximize_window()
+        self.chrome_browser.get('https://web.whatsapp.com/')
+        time.sleep(30)
+
+    def get_contacts(self, whatsapp_group_xpath, contact_element_xpath):
+        group = self.chrome_browser.find_element_by_xpath(whatsapp_group_xpath)
+        group.click()
+        time.sleep(10)
+        contacts = self.chrome_browser.find_elements_by_xpath(
+            contact_element_xpath)
+        # Note: The find elements returns a list object
+        contacts = contacts[0].get_attribute('textContent')
+        # We have to remove white spaces in the numbers
+        contacts = re.sub(r"\s+", "", contacts)
+        # We have to remove stmbols such as '()-'
+        contacts = re.sub(r"[()+-]", "", contacts)
+        # Your number is shown as 'You' on whatsapp Group, we have to remove that also
+        contacts = contacts.replace(",You", "")
+
+        # convert the string to list
+        contact_list = contacts.split(',')
+        # writing the contacts (list) to a csv file
+        f = open('contact_data.csv', 'w')
+        w = csv.writer(f, delimiter=',')
+        # create header
+        w.writerow(['contact'])
+        # split the common separated string values into a CSV file
+        w.writerows([x.split(',') for x in contact_list])
+        f.close()
+        return contact_list
+
+    def quit(self):
+        print('Quiting session in 10 seconds...')
+        time.sleep(10)
+        self.chrome_browser.quit()
+```
+
+
+   2. geocoding.py
+
+```
+from decouple import config
+import pandas as pd 
+import googlemaps 
+
+class GoogleGeocoding:
+    def __init__(self):
+        self.key = config('api_key')
+        self.gmaps = googlemaps.Client(key=self.key)
+
+    def geocode_df(self, dataframe):
+        print('Preparing for geocoding country code...')
+        df = dataframe
+        df = df.value_counts().rename_axis('country').reset_index(name='counts')
+        for index in df.index:
+            df.loc[index, 'longitude'] = (self.gmaps.geocode(df['country'][index]))[0].get('geometry').get('location').get('lng')
+            df.loc[index, 'latitude'] = (self.gmaps.geocode(df['country'][index]))[0].get('geometry').get('location').get('lat')
+        df.to_csv('geocode_data.csv', index=False)
+        print('Geocoding completed')
+        return df
+```
+
+3. plotting.py
+
+```
+from decouple import config
+import plotly.express as px
+import chart_studio
+from chart_studio import plotly as py
+
+# Setting credentials
+px.set_mapbox_access_token(config('mapbox_public_token'))
+cs_username = config('chart_studio_username')
+cs_api = config('chart_studio_api')
+chart_studio.tools.set_credentials_file(username=cs_username,
+                                        api_key=cs_api)
+
+
+class SpatialMapping:
+
+    def plot_map(self, dataframe):
+        fig = px.scatter_mapbox(
+            dataframe, lat="latitude", lon="longitude",
+            color="counts",
+            size="counts",
+            color_continuous_scale=px.colors.sequential.Greens,
+            size_max=20,
+            zoom=1,
+            hover_data=["country", 'counts'],
+            hover_name='country')
+
+        fig.update_layout(
+            title='WhatsApp Analytics: Spatial Mapping of WhatsApp group contacts',
+            mapbox_style="dark")
+
+        fig.show()
+
+        print('The link to the plot can be found here: ', py.plot(
+            fig, filename='Whatsapp Analytics Map', auto_open=True))
+
+    def plot_bar(self, dataframe):
+        fig = px.bar(
+            dataframe, x='country', y='counts',
+            hover_data=["country", 'counts'],
+            color_discrete_sequence=['darkgreen'])
+
+        fig.update_layout(
+            title='WhatsApp Analytics: Distribution of WhatsApp group contacts')
+        fig.show()
+```
+
+4. main.py
+   
+```
+from automate import WhatsappAutomation
+from analytics import WhatsappAnalytics
+from geocoding import GoogleGeocoding
+from plotting import SpatialMapping
+
+if __name__ == '__main__':
+
+    automated_object = WhatsappAutomation()
+    group_xpath = '//*[@id="pane-side"]/div[1]/div/div'
+    contact_xpath = '//*[@id="main"]/header/div[2]/div[2]/span'
+    contact_list = automated_object.get_contacts(group_xpath, contact_xpath)
+    automated_object.quit()
+
+    analytics_object = WhatsappAnalytics()
+    analytics_df = analytics_object.get_insights(contact_list)
+
+    geocoding_object = GoogleGeocoding()
+    geo_df = geocoding_object.geocode_df(analytics_df)
+
+    spatial_mapping_object = SpatialMapping()
+    spatial_mapping_object.plot_map(geo_df)
+    spatial_mapping_object.plot_bar(geo_df)
+```
+
+
+## Results 
