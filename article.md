@@ -132,6 +132,11 @@ Parameters related to the project, goes straight to the source code. Parameters 
 
 To access these environment variable values, we can utilize an already install python library [Python Decouple]('https://pypi.org/project/python-decouple/').
 
-## Overview of the project
+## Project scope statement
+According to WhatsApp statistics, more than 2 billion people in over [180 countries in 60 languages]('https://www.whatsapp.com/about/') uses WhatsApp. WhatsApp, however, remains a market leader in the social media sector with it features of voice and video calling, group calls and has moves into the payment market for business with the launch of WhatsApp business in 2018.
+
+WhatsApp groups has served as environment to establish collective conversations with others around the world. These groups are effective when established for specific reasons so topics discussed and shared are aligned to the purpose of the group. 
+
+For a business use case, it might be interesting to know where users are located to deliver better services and products better. This tutorial is a step in the right direction to aid this analytic procedure and build an interface to geo-locate users in a WhatsApp group.
 
 ## Scripts and explanation
