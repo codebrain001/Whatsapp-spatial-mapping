@@ -5,14 +5,14 @@ In this tutorial, we are going to build an interface that aids the geocoding of 
 ## Prerequisites
 In order to follow and fully understand this tutorial, you'll need to have:
 - [Python 3.6](https://www.python.org/) or newer.
-- Basic knowledge of automation with [selenium]('https://selenium-python.readthedocs.io/index.html)
+- Basic knowledge of automation with [selenium]('https://selenium-python.readthedocs.io/index.htm  l)
 - Set up [Vonage API]('https://www.vonage.com/') account
 - Set up [Google Map API]('https://developers.google.com/maps/documentation')
 - Set up [Plotly]('https://plotly.com/') and [Mapbox]('https://www.mapbox.com/') credentials
 
 Below are the result of the final interface you’ll build:
-![gif](./images/overview-1.gif)
-![gif](./images/overview-2.gif)
+![Project Overview](./images/overview-1.gif)
+![gProject Overview](./images/overview-2.gif)
 
 ## File Structure
 An overview of the file directory for this project, which has been arranged to enforce clean coding best practices is shown below:
@@ -135,7 +135,7 @@ To access these environment variable values, we can utilize an already install p
 ## Project scope statement
 According to WhatsApp statistics, more than 2 billion people in over [180 countries in 60 languages]('https://www.whatsapp.com/about/') uses WhatsApp. WhatsApp, however, remains a market leader in the social media sector with it features of voice and video calling, group calls and has moves into the payment market for business with the launch of WhatsApp business in 2018.
 
-WhatsApp groups has served as environment to establish collective conversations with others around the world. These groups are effective when established for specific reasons so topics discussed and shared are aligned to the purpose of the group. 
+WhatsApp groups has served as an environment to establish collective conversations with others around the world. These groups are effective when established for specific reasons so topics discussed and shared are aligned to the purpose of the group. 
 
 For a business use case, it might be interesting to know where users are located to deliver better services and products better. This tutorial is a step in the right direction to aid this analytic procedure and build an interface to geo-locate users in a WhatsApp group.
 
@@ -151,13 +151,30 @@ To make this project seamless, we are going to do a bit of automation, Whatsapp 
    
 **Note:** In this project, I used the chrome driver. To make the path of the driver quickly and simple to access, move the downloaded driver file to the same directory of the script utilizing it. Take a look at the file structure above.
 
-This script is made up of a `WhatsappAutomation` class that loads the web driver via it's path, maximize the browser window and loads Whatsapp Web application. The 30s delay initiated is to enable the scanning of the QR code 
+This script is made up of a `WhatsappAutomation` class that loads the web driver via it's path, maximize the browser window and loads Whatsapp Web application. The 30 seconds delay initiated is to provide the time to scan the QR code to access your Whatsapp account on the web.
 
-   
+Upon scanning your QR code with your phone, your Whatsapp account opens on the web. 
 
-***
+The  `WhatsappAutomation` class has two classes
+- `get_contacts()`
+- `quit()`
+
+**Note:** The browser has a notification that "*Chrome is being controlled by automated test software*", to highlight that selenium is activated for automation on the browser.
+
+![Whatsapp Web QR](/images/Whatsapp_QR.png)
+
+Next, we need to access the desired group and contacts as shown below
+
+![Whatsapp Web Group](/images/Whatsapp_group.png)
+
+We want to automate this process and select these elements (selecting in this context means clicking) as shown above. These two elements are the two arguments of `get_contacts` method and can be selected by numerous as highlighted in the Selenium documentation [here]('https://selenium-python.readthedocs.io/locating-elements.html'). For the context I used the `xpath` to locate these elements.
+
+**Note:** To access these selectors, you need inspect the Whatsapp web page.
+
+With the contact section selected, we need to clean up the contact number entries and save them as a CSV file. The cleaning involves the removal of characters' attachment to numbers and whitespaces using regular expression. To have more understanding about regular expression, you can check out this [repo]('https://github.com/AISaturdaysLagos/Cohort3/blob/master/Beginner/Week3/Notebook/regular-expressions.ipynb'). Saving the clean contact number entries to CSV format can simply be done by Python in-built [CSV module]('https://docs.python.org/3/library/csv.html'). Finally, we need to quit the selenium powered browser to shut opened browser window and terminates the WebDriver session.
+
+
 ```
-import os
 import time
 import re
 import csv
@@ -181,7 +198,7 @@ class WhatsappAutomation:
         contacts = contacts[0].get_attribute('textContent')
         # We have to remove white spaces in the numbers
         contacts = re.sub(r"\s+", "", contacts)
-        # We have to remove stmbols such as '()-'
+        # We have to remove symbols such as '()-'
         contacts = re.sub(r"[()+-]", "", contacts)
         # Your number is shown as 'You' on whatsapp Group, we have to remove that also
         contacts = contacts.replace(",You", "")
