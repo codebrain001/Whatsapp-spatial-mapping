@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 =======
 # Whatsapp Analytics: Spatial mapping of users of whatsapp groups 
 
