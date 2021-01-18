@@ -128,7 +128,7 @@ Firstly you need to create an environment file (.env), which can easily be done 
 
 Parameters related to the project, goes straight to the source code. Parameters related to an instance of the project, goes to an environment file. 
 
-**N/B:** It is good practice to add the `.env` file to the [gitignore]('https://git-scm.com/docs/gitignore') file. This prevent sensitive information such as API keys and other configuration values to be made public on the source code.
+**Note:** It is good practice to add the `.env` file to the [gitignore]('https://git-scm.com/docs/gitignore') file. This prevent sensitive information such as API keys and other configuration values to be made public on the source code.
 
 To access these environment variable values, we can utilize an already install python library [Python Decouple]('https://pypi.org/project/python-decouple/').
 
@@ -140,9 +140,19 @@ WhatsApp groups has served as environment to establish collective conversations 
 For a business use case, it might be interesting to know where users are located to deliver better services and products better. This tutorial is a step in the right direction to aid this analytic procedure and build an interface to geo-locate users in a WhatsApp group.
 
 ## Scripts and explanation
-Each script is written to contain codes that handle or work together to achieve a common goal utilizing . The following are a high-level explanation for each script.
+Each script is written to contain codes that handle or work together to achieve a common goal utilizing the Object-Oriented Programming paradigm. The following are a high-level explanation for each script.
 
 1. automate.py
+To make this project seamless, we are going to do a bit of automation, Whatsapp automation to be precise.  Selenium is an open-source web-based automation tool, we have already installed it in the installation section. Selenium requires a driver to interface with the browser, and they are different drivers for different browsers. Links to some popular browsers drivers are found below: 
+   - Chrome driver can be downloaded [here]('https://sites.google.com/a/chromium.org/chromedriver/downloads').
+   - Firefox driver can be downloaded [here]('https://github.com/mozilla/geckodriver/releases').
+   - Safari driver can be downloaded [here]('https://webkit.org/blog/6900/webdriver-support-in-safari-10/').
+   - Edge driver can be downloaded [here]('https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/').
+   
+**Note:** In this project, I used the chrome driver. To make the path of the driver quickly and simple to access, move the downloaded driver file to the same directory of the script utilizing it. Take a look at the file structure above.
+
+This script is made up of a `WhatsappAutomation` class that loads the web driver via it's path, maximize the browser window and loads Whatsapp Web application. The 30s delay initiated is to enable the scanning of the QR code 
+
    
 
 ***
@@ -195,7 +205,7 @@ class WhatsappAutomation:
 ```
 
 
-   2. geocoding.py
+   1. geocoding.py
 
 ```
 from decouple import config
