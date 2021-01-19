@@ -12,6 +12,7 @@ In order to follow and fully understand this tutorial, you'll need to have:
 
 Below are the result of the final interface you’ll build:
 ![Project Overview](./images/overview-1.gif)
+***
 ![Project Overview](./images/overview-2.gif)
 
 ## File Structure
