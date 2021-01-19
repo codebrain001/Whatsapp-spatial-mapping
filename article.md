@@ -12,7 +12,7 @@ In order to follow and fully understand this tutorial, you'll need to have:
 
 Below are the result of the final interface you’ll build:
 ![Project Overview](./images/overview-1.gif)
-![gProject Overview](./images/overview-2.gif)
+![Project Overview](./images/overview-2.gif)
 
 ## File Structure
 An overview of the file directory for this project, which has been arranged to enforce clean coding best practices is shown below:
@@ -34,35 +34,35 @@ We need to create an isolated environment for various Python dependencies unique
 First, create a new development folder. In your terminal, run:
 
 ```
-mkdir whatsapp-spatial-mapping
+$ mkdir whatsapp-spatial-mapping
 ```
 Next, create a new Python virtual environment. If you are using Anaconda, you can run the following command:
 
 ```
-conda create -n env python=3.6
+$ conda create -n env python=3.6
 ```
 Then you can activate the environment using:
 
 ```
-conda activate env
+$ conda activate env
 ```
 
 If you are using a standard distribution of Python, create a new virtual environment by running the command below:
 
 ```
-python -m venv env
+$ python -m venv env
 ```
 
 To activate the new environment on a Mac or Linux computer, run:
 
 ```
-source env/bin/activate
+$ source env/bin/activate
 ```
 
 If you are using a Windows computer, activate the environment as follows:
 
 ```
-venv\Scripts\activate
+$ venv\Scripts\activate
 ```
 
 Regardless of the method you used to create and activate the virtual environment, your prompt should have been modified to look like the following:
@@ -72,7 +72,7 @@ Regardless of the method you used to create and activate the virtual environment
 ```
 
 ### Requirement file
-Next with your virtual environment set up, we will install the project dependencies and their specific version (These dependencies versions were the current versions at the time of writing this article)
+Next with your virtual environment set up, we will install the project dependencies and their specific version (These dependencies versions were the current versions at the time of writing this article). In order to create reproducible projects you should stick with my versions of packages.
 
 ```
 chart-studio==1.1.0
@@ -269,8 +269,11 @@ class WhatsappAnalytics:
 
 ```
 
-1. geocoding.py
+3. geocoding.py
 
+Now with the insights readily available, we are going to take the text-based description of a location (in our context being country names) and create geographic coordinates (latitude/longitude pairs) to identify the various locations on the Earth's surface.
+
+This script is made of a `GoogleGeocoding` class that loads the Google Map API keys and has a method `geocode_df` that has an argument of a dataframe of the phone number and the roaming countries. This method also aggregates the dataframe by roaming countries. This method returns a dataframe of the aggregate roaming countries and their respective latitude and longitude pairs.
 
 ```
 from decouple import config
@@ -294,8 +297,11 @@ class GoogleGeocoding:
         return df
 ```
 
-1. plotting.py
+4. plotting.py
+   
+Maps are potent graphs, because we can immediately relate to the question of where. We have our spatial data (latitude and longitude pairs) ready, this script aids the geospatial mapping and analytic visualization of that data. Map making is an art, in order to make our project aesthetically pleasing and attractive, we will be utilizing Plotly library and Mapbox maps to compliment the design. 
 
+This script is made up of `SpatialMapping` class that loads the mapbox token and chart_studio credentials. This class has two methods `plot_map` and `plot_bar` that plots the distribution of the users of the Whatsapp group as a map and a bar chart.
 ```
 from decouple import config
 import plotly.express as px
@@ -343,32 +349,47 @@ class SpatialMapping:
         fig.show()
 ```
 
-4. main.py
-   
+5. main.py
+
+This is the point of execution of the program. Here we import all the script classes and input the required parameters.
+
 ```
 from automate import WhatsappAutomation
 from analytics import WhatsappAnalytics
 from geocoding import GoogleGeocoding
 from plotting import SpatialMapping
 
-if __name__ == '__main__':
+def main():
+    if __name__ == '__main__':
 
-    automated_object = WhatsappAutomation()
-    group_xpath = '//*[@id="pane-side"]/div[1]/div/div'
-    contact_xpath = '//*[@id="main"]/header/div[2]/div[2]/span'
-    contact_list = automated_object.get_contacts(group_xpath, contact_xpath)
-    automated_object.quit()
+        automated_object = WhatsappAutomation()
+        group_xpath = '//*[@id="pane-side"]/div[1]/div/div'
+        contact_xpath = '//*[@id="main"]/header/div[2]/div[2]/span'
+        contact_list = automated_object.get_contacts(group_xpath, contact_xpath)
+        automated_object.quit()
 
-    analytics_object = WhatsappAnalytics()
-    analytics_df = analytics_object.get_insights(contact_list)
+        analytics_object = WhatsappAnalytics()
+        analytics_df = analytics_object.get_insights(contact_list)
 
-    geocoding_object = GoogleGeocoding()
-    geo_df = geocoding_object.geocode_df(analytics_df)
+        geocoding_object = GoogleGeocoding()
+        geo_df = geocoding_object.geocode_df(analytics_df)
 
-    spatial_mapping_object = SpatialMapping()
-    spatial_mapping_object.plot_map(geo_df)
-    spatial_mapping_object.plot_bar(geo_df)
+        spatial_mapping_object = SpatialMapping()
+        spatial_mapping_object.plot_map(geo_df)
+        spatial_mapping_object.plot_bar(geo_df)
+
+main()
 ```
 
 
 ## Results 
+![Project Overview](./images/overview-1.gif)
+![Project Overview](./images/overview-2.gif)
+
+
+And with that, we come to the end of this tutorial. I’m sure you can already think of all the amazing possibilities and use cases of this new knowledge. You can get other potent insights from the Vonage number insight API. The possibilities are endless.
+
+Thanks for taking the time to read this article!
+
+Happy Learning!
+
