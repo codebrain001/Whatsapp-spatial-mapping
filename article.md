@@ -104,13 +104,13 @@ Optionally, you can install all the packages as follows:
 With all our dependencies completed installed for this tutorial, we need to set up some accounts to get our API keys and credentials.
 
 ### Vonage API Account
-To complete this tutorial, you will need a [Vonage API account]('https://dashboard.nexmo.com/sign-in'). If you don’t have one already, you can [sign up today]('https://dashboard.nexmo.com/sign-up') and start building with free credit. Once you have an account, you can find your API Key and API Secret at the top of the [Vonage API Dashboard]('https://dashboard.nexmo.com/sign-in').
+To complete this tutorial, you will need a [Vonage API account](https://dashboard.nexmo.com/sign-in). If you don’t have one already, you can [sign up today](https://dashboard.nexmo.com/sign-up) and start building with free credit. Once you have an account, you can find your API Key and API Secret at the top of the [Vonage API Dashboard](https://dashboard.nexmo.com/sign-in).
 
 ### Google Map Platform 
-The Google Map API is one of the potent APIs readily available on [Google Cloud Console]('https://console.cloud.google.com/'). Firstly, you need to set up a [Google cloud free tier account]('https://cloud.google.com/free'), where you get $300 free credits to explore the Google cloud platform and products.  Next, with Your Google Cloud Console all set up, you need to [create an API]('https://developers.google.com/maps/documentation/javascript/get-api-key') key to connect the [Google Map Platform]('https://cloud.google.com/maps-platform') to our application. Lastly, we [activate the Google Map API ]('https://cloud.google.com/service-usage/docs/enable-disable') to enable it for our project.
+The Google Map API is one of the potent APIs readily available on [Google Cloud Console](https://console.cloud.google.com/). Firstly, you need to set up a [Google cloud free tier account](https://cloud.google.com/free), where you get $300 free credits to explore the Google cloud platform and products.  Next, with Your Google Cloud Console all set up, you need to [create an API]('https://developers.google.com/maps/documentation/javascript/get-api-key') key to connect the [Google Map Platform]('https://cloud.google.com/maps-platform') to our application. Lastly, we [activate the Google Map API ]('https://cloud.google.com/service-usage/docs/enable-disable') to enable it for our project.
 
 ### Plotly API and Mapbox Credentials
-In order to create beautiful data visualizations, we will be utilizing [Plotly]('https://plotly.com/') on Python and enhancing the aesthetic with [Mapbox]('https://www.mapbox.com/'). The Plotly plots is hosted online on Chart Studio (part of Plotly enterprise), you need to [sign up]('https://chart-studio.plotly.com/Auth/login/#/') and generate and save our custom [Plotly API key]('https://plotly.com/python/getting-started-with-chart-studio/'). Also beneficial to the desired plots, you need to [sign up at Mapbox]('https://account.mapbox.com/auth/signup/'). Next, to connect Mapbox with Plotly for our desired visualization, we need to create a [Mapbox authorization token]('https://docs.mapbox.com/help/tutorials/get-started-tokens-api/').
+In order to create beautiful data visualizations, we will be utilizing [Plotly](https://plotly.com/) on Python and enhancing the aesthetic with [Mapbox](https://www.mapbox.com/). The Plotly plots is hosted online on Chart Studio (part of Plotly enterprise), you need to [sign up](https://chart-studio.plotly.com/Auth/login/#/) and generate and save our custom [Plotly API key](https://plotly.com/python/getting-started-with-chart-studio/). Also beneficial to the desired plots, you need to [sign up at Mapbox](https://account.mapbox.com/auth/signup/). Next, to connect Mapbox with Plotly for our desired visualization, we need to create a [Mapbox authorization token](https://docs.mapbox.com/help/tutorials/get-started-tokens-api/).
 
 ## Separation of settings parameters and source code
 In the previous section, we were actively generating various API keys and credentials which are variables that exist outside of our source code and are unique to each user. 
@@ -129,12 +129,12 @@ Firstly you need to create an environment file (.env), which can easily be done 
 
 Parameters related to the project, goes straight to the source code. Parameters related to an instance of the project, goes to an environment file. 
 
-**Note:** It is good practice to add the `.env` file to the [gitignore]('https://git-scm.com/docs/gitignore') file. This prevent sensitive information such as API keys and other configuration values to be made public on the source code.
+**Note:** It is good practice to add the `.env` file to the [gitignore](https://git-scm.com/docs/gitignore) file. This prevent sensitive information such as API keys and other configuration values to be made public on the source code.
 
 To access these environment variable values, we can utilize an already install python library [Python Decouple]('https://pypi.org/project/python-decouple/').
 
 ## Project scope statement
-According to WhatsApp statistics, more than 2 billion people in over [180 countries in 60 languages]('https://www.whatsapp.com/about/') uses WhatsApp. WhatsApp, however, remains a market leader in the social media sector with it features of voice and video calling, group calls and has moves into the payment market for business with the launch of WhatsApp business in 2018.
+According to WhatsApp statistics, more than 2 billion people in over [180 countries in 60 languages](https://www.whatsapp.com/about/) uses WhatsApp. WhatsApp, however, remains a market leader in the social media sector with it features of voice and video calling, group calls and has moves into the payment market for business with the launch of WhatsApp business in 2018.
 
 WhatsApp groups has served as an environment to establish collective conversations with others around the world. These groups are effective when established for specific reasons so topics discussed and shared are aligned to the purpose of the group. 
 
@@ -144,10 +144,10 @@ For a business use case, it might be interesting to know where users are located
 Each script is written to contain codes that handle or work together to achieve a common goal utilizing the Object-Oriented Programming paradigm. The following are a high-level explanation for each script.
 
 1. automate.py: To make this project seamless, we are going to do a bit of automation, Whatsapp automation to be precise.  Selenium is an open-source web-based automation tool, we have already installed it in the installation section. Selenium requires a driver to interface with the browser, and they are different drivers for different browsers. Links to some popular browsers drivers are found below: 
-   - Chrome driver can be downloaded [here]('https://sites.google.com/a/chromium.org/chromedriver/downloads').
-   - Firefox driver can be downloaded [here]('https://github.com/mozilla/geckodriver/releases').
-   - Safari driver can be downloaded [here]('https://webkit.org/blog/6900/webdriver-support-in-safari-10/').
-   - Edge driver can be downloaded [here]('https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/').
+   - Chrome driver can be downloaded [here](https://sites.google.com/a/chromium.org/chromedriver/downloads).
+   - Firefox driver can be downloaded [here](https://github.com/mozilla/geckodriver/releases).
+   - Safari driver can be downloaded [here](https://webkit.org/blog/6900/webdriver-support-in-safari-10/).
+   - Edge driver can be downloaded [here](https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/).
    
 **Note:** In this project, I used the chrome driver. To make the path of the driver quickly and simple to access, move the downloaded driver file to the same directory of the script utilizing it. Take a look at the file structure above.
 
@@ -167,11 +167,11 @@ Next, we need to access the desired group and contacts as shown below
 
 ![Whatsapp Web Group](/images/Whatsapp_group.png)
 
-We want to automate this process and select these elements (selecting in this context means clicking) as shown above. These two elements are the two arguments of `get_contacts` method and can be selected by numerous as highlighted in the Selenium documentation [here]('https://selenium-python.readthedocs.io/locating-elements.html'). For the context I used the `xpath` to locate these elements.
+We want to automate this process and select these elements (selecting in this context means clicking) as shown above. These two elements are the two arguments of `get_contacts` method and can be selected by numerous as highlighted in the Selenium documentation [here](https://selenium-python.readthedocs.io/locating-elements.html). For the context I used the `xpath` to locate these elements.
 
 **Note:** To access these selectors, you need inspect the Whatsapp web page.
 
-With the contact section selected, we need to clean up the contact number entries and save them as a CSV file. The cleaning involves the removal of characters' attachment to numbers and whitespaces using regular expression. To have more understanding about regular expression, you can check out this [repo]('https://github.com/AISaturdaysLagos/Cohort3/blob/master/Beginner/Week3/Notebook/regular-expressions.ipynb'). Saving the clean contact number entries to CSV format can simply be done by Python in-built [CSV module]('https://docs.python.org/3/library/csv.html'). Finally, we need to quit the selenium powered browser to shut opened browser window and terminates the WebDriver session.
+With the contact section selected, we need to clean up the contact number entries and save them as a CSV file. The cleaning involves the removal of characters' attachment to numbers and whitespaces using regular expression. To have more understanding about regular expression, you can check out this [repo](https://github.com/AISaturdaysLagos/Cohort3/blob/master/Beginner/Week3/Notebook/regular-expressions.ipynb). Saving the clean contact number entries to CSV format can simply be done by Python in-built [CSV module](https://docs.python.org/3/library/csv.html). Finally, we need to quit the selenium powered browser to shut opened browser window and terminates the WebDriver session.
 
 
 ```
