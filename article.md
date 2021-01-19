@@ -5,10 +5,10 @@ In this tutorial, we are going to build an interface that aids the geocoding of 
 ## Prerequisites
 In order to follow and fully understand this tutorial, you'll need to have:
 - [Python 3.6](https://www.python.org/) or newer.
-- Basic knowledge of automation with [selenium]('https://selenium-python.readthedocs.io/index.htm  l)
-- Set up [Vonage API]('https://www.vonage.com/') account
-- Set up [Google Map API]('https://developers.google.com/maps/documentation')
-- Set up [Plotly]('https://plotly.com/') and [Mapbox]('https://www.mapbox.com/') credentials
+- Basic knowledge of automation with [selenium](https://selenium-python.readthedocs.io/index.html)
+- Set up [Vonage API](https://www.vonage.com/) account
+- Set up [Google Map API](https://developers.google.com/maps/documentation)
+- Set up [Plotly](https://plotly.com/) and [Mapbox](https://www.mapbox.com/) credentials
 
 Below are the result of the final interface you’ll build:
 ![Project Overview](./images/overview-1.gif)
