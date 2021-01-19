@@ -142,8 +142,7 @@ For a business use case, it might be interesting to know where users are located
 ## Scripts and explanation
 Each script is written to contain codes that handle or work together to achieve a common goal utilizing the Object-Oriented Programming paradigm. The following are a high-level explanation for each script.
 
-1. automate.py
-To make this project seamless, we are going to do a bit of automation, Whatsapp automation to be precise.  Selenium is an open-source web-based automation tool, we have already installed it in the installation section. Selenium requires a driver to interface with the browser, and they are different drivers for different browsers. Links to some popular browsers drivers are found below: 
+1. automate.py: To make this project seamless, we are going to do a bit of automation, Whatsapp automation to be precise.  Selenium is an open-source web-based automation tool, we have already installed it in the installation section. Selenium requires a driver to interface with the browser, and they are different drivers for different browsers. Links to some popular browsers drivers are found below: 
    - Chrome driver can be downloaded [here]('https://sites.google.com/a/chromium.org/chromedriver/downloads').
    - Firefox driver can be downloaded [here]('https://github.com/mozilla/geckodriver/releases').
    - Safari driver can be downloaded [here]('https://webkit.org/blog/6900/webdriver-support-in-safari-10/').
@@ -220,9 +219,58 @@ class WhatsappAutomation:
         time.sleep(10)
         self.chrome_browser.quit()
 ```
+2. analytics.py
+
+With our contacts saved as a CSV file, we need to generate insights from these numbers using the Vonage Number Insights API. This API delivers real-time intelligence about the validity, reachability, and roaming status of a phone number worldwide.
+
+#### **Typical use cases**
+- **Basic API**: Discovering which country a number belongs to and using the information to format the number correctly.
+- **Standard API**: Determining whether the number is a landline or mobile number (to choose between voice and SMS contact) and blocking virtual numbers.
+- **Advanced API**: Ascertaining the risk associated with a number.
+  
+These API provides information about number format and origin, number type, carrier and country, port, validity, reachability (not available in the US), roaming status, roaming carrier, and country. You can easily get started with this API [here]('https://www.vonage.com/communications-apis/number-insight/').
+
+This script is made up of a `WhatsappAnalytics` class that loads the Vonage credentials stored in the `.env` file using python `decouple` module. The class has a `get_insight()` method that takes contact list and initiate the Vonage number insight API to get the phone numbers roaming countries. Finally, the insight (roaming country) per phone number is saved as a CSV file.
+```
+from decouple import config
+import json
+import csv
+import nexmo
+import pandas as pd
 
 
-   1. geocoding.py
+class WhatsappAnalytics:
+    def __init__(self):
+        # Setting up Nexmo credentials
+        self.key = config('client_key')
+        self.secret = config('client_secret')
+        self.client = nexmo.Client(key=self.key, secret=self.secret)
+
+    def get_insights(self, contact_list):
+        print('Getting number insights')
+        data = []
+        for contact in contact_list:
+            insight_json = self.client.get_advanced_number_insight(
+                number=contact).get('country_name')
+            data.append(insight_json)
+
+        # convert the list
+        f = open('country_data.csv', 'w')
+        w = csv.writer(f, delimiter=',')
+        # create header
+        w.writerow(['country'])
+        # split the common separated string values into a CSV file
+        w.writerows([x.split(',') for x in data])
+        f.close()
+        print('Number insights generated successfully')
+
+        dataframe = pd.read_csv('country_data.csv')
+        return dataframe
+
+```
+
+1. geocoding.py
+
 
 ```
 from decouple import config
@@ -246,7 +294,7 @@ class GoogleGeocoding:
         return df
 ```
 
-3. plotting.py
+1. plotting.py
 
 ```
 from decouple import config
