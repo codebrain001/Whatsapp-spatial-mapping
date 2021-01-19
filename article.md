@@ -17,6 +17,7 @@ Below are the result of the final interface you’ll build:
 
 ## File Structure
 An overview of the file directory for this project, which has been arranged to enforce clean coding best practices is shown below:
+```
 ├── README.md
 ├── analytics.py
 ├── automate.py
@@ -25,6 +26,7 @@ An overview of the file directory for this project, which has been arranged to e
 ├── geocoding.py
 ├── main.py
 └── plotting.py
+```
 
 We will create all the files in the above directory tree through the steps of this tutorial.
 
